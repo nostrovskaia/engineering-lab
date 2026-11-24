@@ -4,7 +4,7 @@
 
 Built with **zero external dependencies** using pure HTML5, CSS3, and modular Vanilla JavaScript (ES6+), featuring a strict separation between the portable **Data Core** and the **Presentation Layer**.
 
-🔗 **Live Demo:** `https://<username>.github.io/<repo-name>/` *(EN)* | `https://<username>.github.io/<repo-name>/?lang=ru` *(RU)*
+🔗 **Live Demo:** `https://nostrovskaia.github.io/engineering-lab/` *(RU)* | `https://nostrovskaia.github.io/engineering-lab/?lang=en` *(EN)*
 
 ---
 
