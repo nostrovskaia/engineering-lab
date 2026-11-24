@@ -1,0 +1,451 @@
+
+/* --- Поля ввода и кнопки --- */
+.input {
+  width: 100%;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  padding: 7px 10px;
+  font-family: inherit;
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.input:focus {
+  border-color: var(--accent-cyan);
+  box-shadow: 0 0 0 2px var(--accent-cyan-glow);
+}
+
+textarea.input {
+  resize: vertical;
+  min-height: 64px;
+}
+
+select.input option {
+  background: var(--bg-surface);
+  color: var(--text-primary);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 14px;
+  border-radius: var(--radius-sm);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.btn--sm { padding: 4px 10px; font-size: 12px; }
+
+.btn--primary {
+  background: linear-gradient(135deg, #38bdf8, #0284c7);
+  color: #04070d;
+  font-weight: 700;
+  box-shadow: 0 0 16px var(--accent-cyan-glow);
+}
+.btn--primary:hover {
+  filter: brightness(1.12);
+  box-shadow: 0 0 22px rgba(56, 189, 248, 0.55);
+}
+
+.btn--secondary {
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+  border-color: var(--border-accent);
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.15);
+}
+.btn--secondary:hover { border-color: var(--accent-cyan); }
+
+.btn--ghost {
+  background: rgba(21, 29, 46, 0.6);
+  color: #cbd5e1;
+  border-color: var(--border-subtle);
+}
+.btn--ghost:hover {
+  color: #ffffff;
+  border-color: var(--accent-cyan);
+  background: rgba(56, 189, 248, 0.08);
+}
+
+.btn--icon {
+  padding: 4px 8px;
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+  border: 1px solid var(--border-subtle);
+}
+.btn--icon:hover { border-color: var(--accent-cyan); }
+
+.btn-link {
+  background: none;
+  border: none;
+  color: var(--accent-cyan);
+  font-size: 12px;
+  cursor: pointer;
+}
+.btn-link:hover { text-decoration: underline; }
+
+/* --- Бейджи и индикаторы --- */
+.badge, .tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  padding: 2px 7px;
+  border-radius: 4px;
+}
+
+.badge--version {
+  background: rgba(168, 85, 247, 0.18);
+  color: #d8b4fe;
+  border: 1px solid rgba(168, 85, 247, 0.45);
+  box-shadow: 0 0 10px rgba(168, 85, 247, 0.2);
+}
+
+.badge--type {
+  background: rgba(56, 189, 248, 0.18);
+  color: #7dd3fc;
+  border: 1px solid rgba(56, 189, 248, 0.4);
+}
+
+.badge--level {
+  background: rgba(16, 185, 129, 0.18);
+  color: #6ee7b7;
+  border: 1px solid rgba(16, 185, 129, 0.4);
+}
+
+.tag {
+  background: var(--bg-elevated);
+  color: #cbd5e1;
+  border: 1px solid var(--border-subtle);
+}
+
+.dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 6px;
+}
+.dot--exp { background: var(--accent-cyan); box-shadow: 0 0 8px var(--accent-cyan); }
+.dot--proj { background: var(--accent-violet); box-shadow: 0 0 8px var(--accent-violet); }
+.dot--act { background: var(--accent-emerald); box-shadow: 0 0 8px var(--accent-emerald); }
+.text-muted { color: var(--text-muted); font-size: 12px; }
+
+/* --- Сайдбар фильтров --- */
+.sidebar__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border-subtle);
+  flex-shrink: 0;
+}
+
+.sidebar__header h2 {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent-cyan);
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-height: 0;
+  flex: 1 1 22%;
+}
+
+/* 1-я группа (Технологии) занимает треть (34%) пространства */
+.filter-group:first-of-type {
+  flex: 0 0 34%;
+}
+
+/* 1. Технологии — Голубой (Cyan) */
+.filter-group__title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 5px 8px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, rgba(56, 189, 248, 0.16), transparent);
+  border-left: 3px solid #38bdf8;
+  color: #7dd3fc;
+  flex-shrink: 0;
+}
+
+/* 2. Уровень освоения — Изумрудный (Emerald) */
+.filter-group:nth-of-type(2) .filter-group__title {
+  background: linear-gradient(90deg, rgba(16, 185, 129, 0.16), transparent);
+  border-left-color: #10b981;
+  color: #6ee7b7;
+}
+
+/* 3. Предметные области — Фиолетовый (Violet) */
+.filter-group:nth-of-type(3) .filter-group__title {
+  background: linear-gradient(90deg, rgba(168, 85, 247, 0.16), transparent);
+  border-left-color: #a855f7;
+  color: #d8b4fe;
+}
+
+/* 4. Тип активности — Неоново-розовый (Pink) */
+.filter-group:last-of-type .filter-group__title {
+  background: linear-gradient(90deg, rgba(236, 72, 153, 0.16), transparent);
+  border-left-color: #ec4899;
+  color: #f472b6;
+}
+
+.toggle-pill {
+  display: inline-flex;
+  background: var(--bg-canvas);
+  border: 1px solid var(--border-subtle);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.toggle-pill button {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  padding: 2px 8px;
+  cursor: pointer;
+}
+
+.toggle-pill button.active {
+  background: var(--accent-cyan);
+  color: #04070d;
+  font-weight: 700;
+}
+
+.filter-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.filter-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #e2e8f0;
+  padding: 3px 6px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.filter-checkbox:hover {
+  background: rgba(56, 189, 248, 0.08);
+}
+
+.filter-checkbox:has(input:checked) {
+  background: rgba(56, 189, 248, 0.14);
+  color: #ffffff;
+}
+
+.filter-checkbox input {
+  accent-color: var(--accent-cyan);
+  width: 14px;
+  height: 14px;
+  cursor: pointer;
+}
+
+/* --- Полоса активных (выбранных) фильтров над шкалой (цвета 1-в-1 как у групп) --- */
+.active-filters-bar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 8px 20px;
+  background: rgba(12, 17, 29, 0.85);
+  border-bottom: 1px solid var(--border-subtle);
+  backdrop-filter: blur(8px);
+}
+
+.active-filters-bar__label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+}
+
+.filter-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: rgba(148, 163, 184, 0.14);
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  color: #f1f5f9;
+}
+
+/* 1. Чипс технологии — Голубой (Cyan) */
+.filter-chip.chip--tech {
+  background: rgba(56, 189, 248, 0.16);
+  border-color: rgba(56, 189, 248, 0.45);
+  color: #7dd3fc;
+}
+
+/* 2. Чипс уровня освоения — Изумрудный (Emerald) */
+.filter-chip.chip--level {
+  background: rgba(16, 185, 129, 0.16);
+  border-color: rgba(16, 185, 129, 0.45);
+  color: #6ee7b7;
+}
+
+/* 3. Чипс предметной области — Фиолетовый (Violet) */
+.filter-chip.chip--domain {
+  background: rgba(168, 85, 247, 0.16);
+  border-color: rgba(168, 85, 247, 0.45);
+  color: #d8b4fe;
+}
+
+/* 4. Чипс типа активности — Неоново-розовый (Pink) */
+.filter-chip.chip--type {
+  background: rgba(236, 72, 153, 0.16);
+  border-color: rgba(236, 72, 153, 0.45);
+  color: #f472b6;
+}
+
+.filter-chip button {
+  background: none;
+  border: none;
+  color: inherit;
+  opacity: 0.75;
+  cursor: pointer;
+  font-size: 11px;
+  line-height: 1;
+}
+
+.filter-chip button:hover {
+  opacity: 1;
+}
+
+/* --- Правая панель (Drawer) и Формы --- */
+.drawer__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border-subtle);
+  background: var(--bg-surface);
+}
+.drawer__header h3 { font-size: 15px; font-weight: 600; color: var(--text-primary); }
+
+.drawer__body {
+  padding: 20px 20px 40px 20px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.editor-form { display: flex; flex-direction: column; gap: 14px; }
+.form-group { display: flex; flex-direction: column; gap: 5px; }
+.form-group label { font-size: 12px; color: var(--text-secondary); font-weight: 500; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.form-header-row { display: flex; justify-content: space-between; align-items: center; }
+
+.tech-rows { display: flex; flex-direction: column; gap: 10px; }
+.tech-link-card {
+  background: var(--bg-canvas);
+  border: 1px solid var(--border-subtle);
+  border-left: 3px solid var(--accent-violet);
+  border-radius: 6px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.tech-link-card__top { display: flex; gap: 8px; }
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+/* --- Детали записи --- */
+.details-view { display: flex; flex-direction: column; gap: 16px; }
+.details-meta { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+
+.details-title {
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 1.35;
+  background: linear-gradient(90deg, #38bdf8, #a855f7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.details-subtitle {
+  font-size: 13px;
+  font-weight: 500;
+  color: #6ee7b7;
+  margin-top: -8px;
+}
+
+.details-block { display: flex; flex-direction: column; gap: 6px; }
+.details-block h4 {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #7dd3fc;
+  padding-left: 8px;
+  border-left: 2px solid var(--accent-cyan);
+}
+.details-block p { font-size: 13px; color: #e2e8f0; white-space: pre-line; }
+.tags-row { display: flex; flex-wrap: wrap; gap: 6px; }
+
+.detail-tech-list { display: flex; flex-direction: column; gap: 8px; }
+.detail-tech-item {
+  background: var(--bg-canvas);
+  border: 1px solid var(--border-subtle);
+  border-left: 3px solid var(--accent-cyan);
+  border-radius: 5px;
+  padding: 10px;
+}
+.detail-tech-item__top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; color: var(--text-primary); }
+.detail-tech-item__meta { font-size: 11px; color: var(--text-secondary); }
+.detail-tech-item__note { font-size: 12px; color: var(--text-muted); margin-top: 6px; font-style: italic; }
+
+.details-actions {
+  display: flex;
+  gap: 8px;
+  padding-top: 16px;
+border-top: 1px solid var(--border-subtle);
+}
+.empty-state {
+position: absolute;
+inset: 0;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+gap: 14px;
+color: var(--text-secondary);
+}

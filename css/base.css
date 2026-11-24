@@ -1,0 +1,82 @@
+:root {
+  --bg-canvas: #060911;
+  --bg-surface: #0c111d;
+  --bg-panel: rgba(12, 17, 29, 0.85);
+  --bg-elevated: #141d30;
+
+  --border-subtle: rgba(148, 163, 184, 0.16);
+  --border-accent: rgba(56, 189, 248, 0.45);
+
+  --accent-cyan: #38bdf8;
+  --accent-cyan-glow: rgba(56, 189, 248, 0.4);
+  --accent-violet: #a855f7;
+  --accent-violet-glow: rgba(168, 85, 247, 0.4);
+  --accent-pink: #ec4899;
+  --accent-emerald: #10b981;
+  --accent-emerald-glow: rgba(16, 185, 129, 0.35);
+
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  --topbar-height: 58px;
+  --sidebar-width: 280px;
+  --drawer-width: 440px;
+  --radius-sm: 5px;
+  --radius-md: 8px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  background-color: var(--bg-canvas);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.5;
+  overflow: hidden;
+  /* Голубая топология микросхемы (Base64 SVG) + глубокое голубое свечение */
+  background-image:
+    radial-gradient(circle at 20% 25%, rgba(56, 189, 248, 0.16) 0%, transparent 48%),
+    radial-gradient(circle at 80% 75%, rgba(2, 132, 199, 0.14) 0%, transparent 50%),
+    url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjEyMCIgdmlld0JveD0iMCAwIDEyMCAxMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMzhiZGY4IiBzdHJva2Utb3BhY2l0eT0iMC4xMiIgc3Ryb2tlLXdpZHRoPSIxLjIiPjxwYXRoIGQ9Ik0wIDIwaDMwbDE1IDE1aDMwbDE1LTE1aDMwIi8+PHBhdGggZD0iTTAgOTBoMjBsMTUtMTVoNDBsMTUgMTVoMzAiLz48cGF0aCBkPSJNMjAgMHYyMGwxNSAxNXY0MGwtMTUgMTV2MzAiLz48cGF0aCBkPSJNMTAwIDB2MzBsLTE1IDE1djMwbDE1IDE1djMwIi8+PGNpcmNsZSBjeD0iMzAiIGN5PSIyMCIgcj0iMi41IiBmaWxsPSIjMDYwOTExIi8+PGNpcmNsZSBjeD0iNzUiIGN5PSIzNSIgcj0iMi41IiBmaWxsPSIjMzhiZGY4IiBmaWxsLW9wYWNpdHk9IjAuMjUiLz48Y2lyY2xlIGN5PSI3NSIgY3g9IjM1IiByPSIyLjUiIGZpbGw9IiMwNjA5MTEiLz48Y2lyY2xlIGN4PSI4NSIgY3k9IjYwIiByPSIzIiBmaWxsPSIjMzhiZGY4IiBmaWxsLW9wYWNpdHk9IjAuMiIvPjwvZz48L3N2Zz4=");
+  background-size: 100% 100%, 100% 100%, 120px 120px;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(6, 9, 17, 0.6);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(56, 189, 248, 0.3);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(56, 189, 248, 0.6);
+}
+
+.mono-text {
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* Скрываем кнопки редактирования, импорта и экспорта, если не передан ключ ?edit=true */
+body:not(.is-edit-mode) .edit-only {
+  display: none !important;
+}
+

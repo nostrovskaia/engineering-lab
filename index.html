@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Engineering Lab — Career Timeline</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iMTQiIGZpbGw9IiMwNjA5MTEiLz48cmVjdCB4PSIxNiIgeT0iMTYiIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgcng9IjYiIGZpbGw9IiMwZjE3MmEiIHN0cm9rZT0iIzM4YmRmOCIgc3Ryb2tlLXdpZHRoPSIzIi8+PGNpcmNsZSBjeD0iMzIiIGN5PSIzMiIgcj0iNiIgZmlsbD0iIzM4YmRmOCIvPjxwYXRoIGQ9Ik0yNCA4djhNMzIgOHY4TTQwIDh2OE0yNCA0OHY4TTMyIDQ4djhNNDAgNDh2OE04IDI0aDhNOCAzMmg4TTggNDBoOE00OCAyNGg4TTQ4IDMyaDhNNDggNDBoOCIgc3Ryb2tlPSIjMzhiZGY4IiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjwvc3ZnPg==" />
+
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/timeline.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <!-- Верхняя панель управления -->
+    <header class="topbar">
+      <div class="topbar__brand">
+        <span class="brand-dot"></span>
+        <h1>Engineering Lab</h1>
+        <span class="badge badge--version">MVP 1.0</span>
+      </div>
+
+      <div class="topbar__search">
+        <input type="search" id="searchInput" class="input" data-i18n-placeholder="search_placeholder" placeholder="Поиск по записям, технологиям, заметкам..." />
+      </div>
+
+            <div class="topbar__actions">
+        <div class="toggle-pill" id="langToggle" title="Язык интерфейса / Language">
+          <button data-lang="ru" class="active">RU</button>
+          <button data-lang="en">EN</button>
+        </div>
+        <button id="btnImport" class="btn btn--ghost edit-only" data-i18n="btn_import">Импорт JSON</button>
+        <button id="btnExport" class="btn btn--ghost edit-only" data-i18n="btn_export">Экспорт JSON</button>
+        <button id="btnNewRecord" class="btn btn--primary edit-only" data-i18n="btn_new">+ Добавить запись</button>
+        <input type="file" id="fileInput" accept=".json" hidden />
+      </div>
+    </header>
+
+    <!-- Основная рабочая область -->
+    <div class="workspace">
+      <!-- Боковая панель фильтров -->
+      <aside class="sidebar">
+        <div class="sidebar__header">
+          <h2 data-i18n="filters_title">Фильтры</h2>
+          <button id="btnResetFilters" class="btn-link" data-i18n="btn_reset">Сбросить</button>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-group__title">
+            <span data-i18n="filter_tech">Навыки и технологии</span>
+            <div class="toggle-pill" id="techLogicToggle">
+              <button data-mode="ANY" class="active">Any</button>
+              <button data-mode="ALL">All</button>
+            </div>
+          </div>
+          <div id="filterTechnologies" class="filter-list"></div>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-group__title" data-i18n="filter_levels">Уровень освоения</div>
+          <div id="filterLevels" class="filter-list"></div>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-group__title" data-i18n="filter_domains">Предметные области</div>
+          <div id="filterDomains" class="filter-list"></div>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-group__title" data-i18n="filter_types">Тип активности</div>
+          <div id="filterTypes" class="filter-list"></div>
+        </div>
+      </aside>
+
+      <!-- Контейнер Timeline -->
+      <main class="timeline-viewport">
+        <div class="timeline-controls">
+          <div class="zoom-controls">
+            <button id="btnZoomOut" class="btn btn--icon" title="Отдалить">−</button>
+            <span id="zoomLabel" class="mono-text">100%</span>
+            <button id="btnZoomIn" class="btn btn--icon" title="Приблизить">+</button>
+          </div>
+          <div class="legend">
+            <span class="legend-item"><i class="dot dot--exp"></i> Experience</span>
+            <span class="legend-item"><i class="dot dot--proj"></i> Project</span>
+            <span class="legend-item"><i class="dot dot--act"></i> Activity</span>
+          </div>
+        </div>
+
+        <!-- Полоса выбранных фильтров -->
+        <div id="activeFiltersBar" class="active-filters-bar hidden"></div>
+
+        <div id="timelineCanvas" class="timeline-canvas">
+          <div class="empty-state">
+            <p data-i18n="empty_db">Нет данных для отображения</p>
+            <button id="btnLoadSample" class="btn btn--secondary" data-i18n="btn_load_sample">Загрузить демо-данные</button>
+          </div>
+        </div>
+      </main>
+
+      <!-- Правая панель деталей / редактора -->
+      <aside id="drawerPanel" class="drawer hidden">
+        <div class="drawer__header">
+          <h3 id="drawerTitle" data-i18n="details_title">Детали записи</h3>
+          <button id="btnCloseDrawer" class="btn btn--icon">✕</button>
+        </div>
+        <div id="drawerContent" class="drawer__body"></div>
+      </aside>
+    </div>
+  </div>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

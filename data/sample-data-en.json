@@ -1,0 +1,124 @@
+{
+  "schemaVersion": "1.0.0",
+  "meta": {
+    "createdAt": "2026-11-24T05:45:00.000Z",
+    "updatedAt": "2026-11-24T05:45:00.000Z"
+  },
+  "dictionaries": {
+    "technologies": [
+      { "id": "tech-ts", "name": "TypeScript" },
+      { "id": "tech-kafka", "name": "Kafka" },
+      { "id": "tech-pw", "name": "Playwright" },
+      { "id": "tech-k8s", "name": "Kubernetes" },
+      { "id": "tech-python", "name": "Python" },
+      { "id": "tech-ai", "name": "AI / LLM" }
+    ],
+    "domains": [
+      { "id": "dom-qa", "name": "Quality Assurance" },
+      { "id": "dom-auto", "name": "Test Automation" },
+      { "id": "dom-arch", "name": "Software Architecture" },
+      { "id": "dom-data", "name": "Data Engineering" }
+    ]
+  },
+  "records": [
+    {
+      "id": "rec-en-exp-1",
+      "type": "Experience",
+      "createdAt": "2026-11-24T05:45:00.000Z",
+      "updatedAt": "2026-11-24T05:45:00.000Z",
+      "title": "QA Automation Engineer — CloudStream",
+      "company": "CloudStream",
+      "role": "QA Automation Engineer",
+      "description": "Built and maintained E2E test automation framework for a high-load video streaming platform.",
+      "startDate": "2023-03-01",
+      "endDate": "2024-08-30",
+      "isCurrent": false,
+      "responsibilities": "Designed TypeScript test suites, configured parallel execution in GitLab CI.",
+      "achievements": "Achieved 85% critical path coverage and reduced regression suite runtime from 3h to 18m.",
+      "domainIds": ["dom-qa", "dom-auto"],
+      "links": [],
+      "notes": ""
+    },
+    {
+      "id": "rec-en-exp-2",
+      "type": "Experience",
+      "createdAt": "2026-11-24T05:45:00.000Z",
+      "updatedAt": "2026-11-24T05:45:00.000Z",
+      "title": "Staff Quality Architect — FinTech Core",
+      "company": "FinTech Core",
+      "role": "Staff Quality Architect",
+      "description": "Testing architecture for distributed microservices and asynchronous payment pipelines.",
+      "startDate": "2024-09-10",
+      "endDate": null,
+      "isCurrent": true,
+      "responsibilities": "Ephemeral test environments in Kubernetes, Kafka consumer contract testing, team mentoring.",
+      "achievements": "Implemented automated event consistency verification across 12 payment microservices.",
+      "domainIds": ["dom-qa", "dom-auto", "dom-arch", "dom-data"],
+      "links": [],
+      "notes": ""
+    },
+    {
+      "id": "rec-en-act-1",
+      "type": "Activity",
+      "activityType": "Course",
+      "createdAt": "2026-11-24T05:45:00.000Z",
+      "updatedAt": "2026-11-24T05:45:00.000Z",
+      "title": "Course: Distributed Systems & Apache Kafka Internals",
+      "description": "Deep-dive training on fault-tolerant message brokers and stream processing.",
+      "startDate": "2024-03-01",
+      "endDate": "2024-05-25",
+      "organizer": "HighLoad Academy",
+      "format": "Online",
+      "topics": "Partitioning, Replication, Exactly-once semantics, Schema Registry",
+      "takeaways": "Learned how to simulate network partitions and verify idempotency.",
+      "domainIds": ["dom-arch", "dom-data"],
+      "links": [],
+      "notes": ""
+    },
+    {
+      "id": "rec-en-act-2",
+      "type": "Activity",
+      "activityType": "Conference",
+      "createdAt": "2026-11-24T05:45:00.000Z",
+      "updatedAt": "2026-11-24T05:45:00.000Z",
+      "title": "Heisenbug Conf — Speaker: AI Agents in QA",
+      "description": "Conference talk on autonomous failure triage and self-healing locators.",
+      "startDate": "2025-04-12",
+      "endDate": "2025-04-13",
+      "organizer": "JUG Ru Group",
+      "format": "Offline",
+      "topics": "LLM failure clustering, Contract testing, Observability",
+      "takeaways": "Great community feedback and networking.",
+      "domainIds": ["dom-qa", "dom-auto"],
+      "links": [],
+      "notes": ""
+    },
+    {
+      "id": "rec-en-proj-1",
+      "type": "Project",
+      "projectType": "Personal",
+      "status": "In Progress",
+      "createdAt": "2026-11-24T05:45:00.000Z",
+      "updatedAt": "2026-11-24T05:45:00.000Z",
+      "title": "Engineering Lab — Competency & Career Timeline System",
+      "description": "Local-first web application with a visualization-agnostic Data Core and interactive Career Timeline.",
+      "startDate": "2026-08-15",
+      "endDate": null,
+      "goals": "Build a portable professional data model independent of UI frameworks.",
+      "tasks": "Schema validation, lane-packing timeline engine, bilingual support.",
+      "results": "Working MVP 1.0 built with clean Vanilla JS and Neon Engineering UI.",
+      "domainIds": ["dom-arch"],
+      "links": [],
+      "notes": ""
+    }
+  ],
+  "recordTechnologies": [
+    { "id": "en-l1", "record_id": "rec-en-exp-1", "technology_id": "tech-ts", "proficiency_level": "Applied", "relevance": "Primary", "evidence_type": "Professional Work", "notes": "Core automation language" },
+    { "id": "en-l2", "record_id": "rec-en-exp-1", "technology_id": "tech-pw", "proficiency_level": "Professional", "relevance": "Primary", "evidence_type": "Professional Work", "notes": "600+ E2E tests" },
+    { "id": "en-l3", "record_id": "rec-en-exp-2", "technology_id": "tech-kafka", "proficiency_level": "Professional", "relevance": "Primary", "evidence_type": "Professional Work", "notes": "Event stream validation" },
+    { "id": "en-l4", "record_id": "rec-en-exp-2", "technology_id": "tech-k8s", "proficiency_level": "Applied", "relevance": "Secondary", "evidence_type": "Professional Work", "notes": "Dynamic test namespaces" },
+    { "id": "en-l5", "record_id": "rec-en-act-1", "technology_id": "tech-kafka", "proficiency_level": "Studied", "relevance": "Primary", "evidence_type": "Course", "notes": "Broker internals" },
+    { "id": "en-l6", "record_id": "rec-en-act-2", "technology_id": "tech-ai", "proficiency_level": "Exposed", "relevance": "Primary", "evidence_type": "Conference/Webinar", "notes": "AI in QA" },
+    { "id": "en-l7", "record_id": "rec-en-proj-1", "technology_id": "tech-ts", "proficiency_level": "Professional", "relevance": "Primary", "evidence_type": "Personal Project", "notes": "Data modeling" }
+  ]
+}

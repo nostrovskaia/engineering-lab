@@ -1,0 +1,920 @@
+{
+  "schemaVersion": "1.0.0",
+  "meta": {
+    "createdAt": "2026-11-23T10:00:00.000Z",
+    "updatedAt": "2026-11-24T17:40:44.619Z"
+  },
+  "dictionaries": {
+    "technologies": [
+      {
+        "id": "tech-ts",
+        "name": "TypeScript"
+      },
+      {
+        "id": "tech-kafka",
+        "name": "Kafka"
+      },
+      {
+        "id": "tech-wdio",
+        "name": "WebdriverIO"
+      },
+      {
+        "id": "tech-sql",
+        "name": "SQL"
+      },
+      {
+        "id": "tech-25-pw",
+        "name": "Playwright"
+      },
+      {
+        "id": "tech-25-docker",
+        "name": "Docker"
+      },
+      {
+        "id": "tech-25-grafana",
+        "name": "Grafana"
+      },
+      {
+        "id": "tech-25-redis",
+        "name": "Redis"
+      },
+      {
+        "id": "tech-25-grpc",
+        "name": "gRPC"
+      },
+      {
+        "id": "tech-25-python",
+        "name": "Python"
+      },
+      {
+        "id": "tech-25-ai",
+        "name": "AI / LLM"
+      },
+      {
+        "id": "tech-js",
+        "name": "JavaScript"
+      },
+      {
+        "id": "tech-k8s",
+        "name": "Kubernetes"
+      },
+      {
+        "id": "tech-ci",
+        "name": "CI/CD"
+      }
+    ],
+    "domains": [
+      {
+        "id": "dom-qa",
+        "name": "Quality Assurance"
+      },
+      {
+        "id": "dom-auto",
+        "name": "Test Automation"
+      },
+      {
+        "id": "dom-arch",
+        "name": "Software Architecture"
+      },
+      {
+        "id": "dom-25-perf",
+        "name": "Performance & Observability"
+      },
+      {
+        "id": "dom-25-sec",
+        "name": "Security & Reliability"
+      },
+      {
+        "id": "dom-data",
+        "name": "Data Engineering"
+      },
+      {
+        "id": "dom-a11y",
+        "name": "Accessibility"
+      }
+    ]
+  },
+  "records": [
+    {
+      "id": "rec-exp-1",
+      "type": "Experience",
+      "createdAt": "2026-11-24T05:00:00.000Z",
+      "updatedAt": "2026-11-24T05:00:00.000Z",
+      "title": "QA Engineer — RetailTech Solutions",
+      "company": "RetailTech Solutions",
+      "role": "QA Engineer",
+      "description": "Функциональное и регрессионное тестирование высоконагруженного e-commerce портала и мобильного API.",
+      "startDate": "2022-02-01",
+      "endDate": "2023-05-15",
+      "isCurrent": false,
+      "responsibilities": "Составление тест-планов, тестирование REST API, проверка миграций БД, запуск первых UI-автотестов.",
+      "achievements": "Снизил количество критических багов на проде на 40% за счёт внедрения чек-листов интеграционного тестирования.",
+      "domainIds": [
+        "dom-qa"
+      ],
+      "links": [],
+      "notes": "Отличная школа классического QA и работы с большими базами данных."
+    },
+    {
+      "id": "rec-act-1",
+      "type": "Activity",
+      "createdAt": "2026-11-23T10:00:00.000Z",
+      "updatedAt": "2026-11-23T10:00:00.000Z",
+      "activityType": "Self-study",
+      "title": "Глубокое погружение в архитектуру Apache Kafka",
+      "description": "Изучение партиционирования, консьюмер-групп и гарантий доставки.",
+      "startDate": "2024-05-10",
+      "endDate": "2024-06-20",
+      "organizer": "Самостоятельно",
+      "format": "Online",
+      "topics": "Brokers, Topics, Offset management",
+      "takeaways": "Понимание, как тестировать консистентность данных при сбоях брокера.",
+      "domainIds": [
+        "dom-arch"
+      ],
+      "links": [],
+      "notes": ""
+    },
+    {
+      "id": "rec-2025-exp-1",
+      "type": "Experience",
+      "createdAt": "2026-11-24T05:30:00.000Z",
+      "updatedAt": "2026-11-24T05:30:00.000Z",
+      "title": "Lead QA Automation — PayFlow Systems (H1 2025)",
+      "company": "PayFlow Systems",
+      "role": "Lead QA Automation Engineer",
+      "description": "Руководство командой автоматизации из 4 инженеров, переход на единый стек Playwright + gRPC.",
+      "startDate": "2025-01-10",
+      "endDate": "2025-06-30",
+      "isCurrent": false,
+      "responsibilities": "Проектирование тестовой архитектуры, код-ревью, внедрение метрик качества релизов.",
+      "achievements": "Сократил время обратной связи на PR с 45 до 9 минут.",
+      "domainIds": [
+        "dom-auto",
+        "dom-arch"
+      ],
+      "links": [],
+      "notes": ""
+    },
+    {
+      "id": "rec-2025-exp-2",
+      "type": "Experience",
+      "createdAt": "2026-11-24T05:30:00.000Z",
+      "updatedAt": "2026-11-24T05:30:00.000Z",
+      "title": "Staff Quality Architect — PayFlow Systems (H2 2025)",
+      "company": "PayFlow Systems",
+      "role": "Staff Quality Architect",
+      "description": "Повышение до архитектора качества: внедрение observability в автотестах и хаос-тестирования.",
+      "startDate": "2025-07-01",
+      "endDate": "2025-12-25",
+      "isCurrent": false,
+      "responsibilities": "Интеграция трассировки запросов в тесты, аудит отказоустойчивости кэшей Redis.",
+      "achievements": "Внедрил дашборды стабильности тестов в Grafana, выявил 14 утечек памяти до прода.",
+      "domainIds": [
+        "dom-arch",
+        "dom-25-perf",
+        "dom-25-sec"
+      ],
+      "links": [],
+      "notes": ""
+    },
+    {
+      "id": "rec-2025-act-1",
+      "type": "Activity",
+      "activityType": "Course",
+      "createdAt": "2026-11-24T05:30:00.000Z",
+      "updatedAt": "2026-11-24T05:30:00.000Z",
+      "title": "Интенсив: Observability, Prometheus и Grafana",
+      "description": "Практический курс по построению метрик, алертов и анализу латентности микросервисов.",
+      "startDate": "2025-01-20",
+      "endDate": "2025-03-05",
+      "organizer": "DevOps & SRE School",
+      "format": "Online",
+      "topics": "PromQL, Red/Use метрики, OpenTelemetry",
+      "takeaways": "Научился связывать падения E2E-тестов с пиками нагрузки на БД.",
+      "domainIds": [
+        "dom-25-perf"
+      ],
+      "links": [],
+      "notes": ""
+    },
+    {
+      "id": "rec-2025-proj-1",
+      "type": "Project",
+      "projectType": "Commercial",
+      "status": "Completed",
+      "createdAt": "2026-11-24T05:30:00.000Z",
+      "updatedAt": "2026-11-24T05:30:00.000Z",
+      "title": "Библиотека контрактного тестирования gRPC-сервисов",
+      "description": "Внутренний npm-пакет на TypeScript для генерации моков и проверки proto-схем.",
+      "startDate": "2025-02-15",
+      "endDate": "2025-04-30",
+      "goals": "Исключить рассинхрон контрактов между 15 микросервисами.",
+      "tasks": "Парсинг .proto файлов, автоматическая валидация ответов в CI.",
+      "results": "Внедрено в 100% репозиториев платёжного контура.",
+      "domainIds": [
+        "dom-auto",
+        "dom-arch"
+      ],
+      "links": [],
+      "notes": ""
+    },
+    {
+      "id": "rec-2025-act-2",
+      "type": "Activity",
+      "activityType": "Conference",
+      "createdAt": "2026-11-24T05:30:00.000Z",
+      "updatedAt": "2026-11-24T05:30:00.000Z",
+      "title": "Спикер на QA TechConf 2025: Тестирование gRPC",
+      "description": "Выступление с кейсом о переходе с REST на gRPC и автоматизации бинарных протоколов.",
+      "startDate": "2025-05-16",
+      "endDate": "2025-05-17",
+      "organizer": "TechConf",
+      "format": "Offline",
+      "topics": "Protobuf, gRPC streaming, контрактные тесты",
+      "takeaways": "Отличный фидбек от сообщества и новые контакты.",
+      "domainIds": [
+        "dom-auto"
+      ],
+      "links": [],
+      "notes": ""
+    },
+    {
+      "id": "rec-2025-act-3",
+      "type": "Activity",
+      "activityType": "Self-study",
+      "createdAt": "2026-11-24T05:30:00.000Z",
+      "updatedAt": "2026-11-24T05:30:00.000Z",
+      "title": "Паттерны кэширования и тестирование Redis Cluster",
+      "description": "Изучение инвалидации кэша, race conditions и отказов нод в Redis.",
+      "startDate": "2025-06-01",
+      "endDate": "2025-07-15",
+      "organizer": "Самостоятельно",
+      "format": "Online",
+      "topics": "Cache-Aside, TTL, Sentinel, Redis Lua scripts",
+      "takeaways": "Составил чек-лист проверки сбоев кэша для критичных ручек.",
+      "domainIds": [
+        "dom-25-perf",
+        "dom-25-sec"
+      ],
+      "links": [],
+      "notes": ""
+    },
+    {
+      "id": "rec-2025-proj-2",
+      "type": "Project",
+      "projectType": "Personal",
+      "status": "Completed",
+      "createdAt": "2026-11-24T05:30:00.000Z",
+      "updatedAt": "2026-11-24T05:30:00.000Z",
+      "title": "Docker-оркестратор изолированных тестовых стендов",
+      "description": "CLI-инструмент на Python для поднятия микро-окружений с БД и Redis за 15 секунд.",
+      "startDate": "2025-07-20",
+      "endDate": "2025-09-10",
+      "goals": "Упростить локальный запуск интеграционных тестов для разработчиков.",
+      "tasks": "Шаблоны docker-compose, автоочистка томов, проброс портов.",
+      "results": "Используется всей командой разработки локально.",
+      "domainIds": [
+        "dom-auto"
+      ],
+      "links": [],
+      "notes": ""
+    },
+    {
+      "id": "rec-2025-act-4",
+      "type": "Activity",
+      "activityType": "Webinar",
+      "createdAt": "2026-11-24T05:30:00.000Z",
+      "updatedAt": "2026-11-24T05:30:00.000Z",
+      "title": "Воркшоп: Chaos Engineering в микросервисах",
+      "description": "Практика инжекции сетевых задержек и отказов контейнеров в Docker.",
+      "startDate": "2025-09-24",
+      "endDate": "2025-09-24",
+      "organizer": "SRE Meetup",
+      "format": "Online",
+      "topics": "Toxiproxy, fault injection, graceful degradation",
+      "takeaways": "Внедрил симуляцию таймаутов Redis в ночной прогон.",
+      "domainIds": [
+        "dom-25-sec"
+      ],
+      "links": [],
+      "notes": ""
+    },
+    {
+      "id": "rec-2025-act-5",
+      "type": "Activity",
+      "activityType": "Experiment",
+      "createdAt": "2026-11-24T05:30:00.000Z",
+      "updatedAt": "2026-11-24T05:30:00.000Z",
+      "title": "Эксперимент: Генерация API-тестов из OpenAPI через LLM",
+      "description": "Проверка качества автогенерации негативных сценариев на базе локальных моделей.",
+      "startDate": "2025-10-05",
+      "endDate": "2025-11-15",
+      "organizer": "R&D Sprint",
+      "format": "Online",
+      "topics": "Prompt engineering, JSON Schema validation, Python",
+      "takeaways": "LLM отлично находит граничные значения для валидации полей.",
+      "domainIds": [
+        "dom-auto"
+      ],
+      "links": [],
+      "notes": ""
+    },
+    {
+      "id": "rec-2025-proj-3",
+      "type": "Project",
+      "projectType": "Commercial",
+      "status": "Completed",
+      "createdAt": "2026-11-24T05:30:00.000Z",
+      "updatedAt": "2026-11-24T05:30:00.000Z",
+      "title": "Портал метрик качества (Quality Gate Dashboard)",
+      "description": "Сбор статистики прогонов Playwright и метрик прод-инцидентов в Grafana.",
+      "startDate": "2025-10-20",
+      "endDate": "2025-12-20",
+      "goals": "Сделать прозрачным влияние автотестов на стабильность релизов.",
+      "tasks": "Экспорт результатов тестов в TimescaleDB, настройка панелей Grafana.",
+      "results": "Руководство получило единый экран готовности релиза к выкладке.",
+      "domainIds": [
+        "dom-25-perf",
+        "dom-arch"
+      ],
+      "links": [],
+      "notes": ""
+    },
+    {
+      "id": "rec-exp-2",
+      "type": "Experience",
+      "createdAt": "2026-11-24T05:00:00.000Z",
+      "updatedAt": "2026-11-24T05:00:00.000Z",
+      "title": "QA Automation Engineer — CloudStream",
+      "company": "CloudStream",
+      "role": "QA Automation Engineer",
+      "description": "Разработка и поддержка фреймворка автоматизации тестирования для стриминговой платформы.",
+      "startDate": "2023-06-01",
+      "endDate": "2024-08-30",
+      "isCurrent": false,
+      "responsibilities": "Написание E2E-тестов на TypeScript и WebdriverIO, настройка параллельного прогона в GitLab CI.",
+      "achievements": "Покрыл автотестами 85% критического пользовательского пути и сократил время прогона с 3 часов до 18 минут.",
+      "domainIds": [
+        "dom-qa",
+        "dom-auto"
+      ],
+      "links": [],
+      "notes": ""
+    },
+    {
+      "id": "rec-exp-3",
+      "type": "Experience",
+      "createdAt": "2026-11-24T05:00:00.000Z",
+      "updatedAt": "2026-11-24T05:00:00.000Z",
+      "title": "Senior QA Automation & Quality Architect — FinTech Core",
+      "company": "FinTech Core",
+      "role": "Senior QA Automation Engineer",
+      "description": "Проектирование архитектуры тестирования распределённых микросервисов и асинхронных платёжных очередей.",
+      "startDate": "2024-09-10",
+      "endDate": null,
+      "isCurrent": true,
+      "responsibilities": "Архитектура тестовых стендов в Kubernetes, тестирование Kafka-консьюмеров, менторство команды автоматизации.",
+      "achievements": "Внедрил контрактное тестирование и автоматическую проверку консистентности событий в Kafka.",
+      "domainIds": [
+        "dom-qa",
+        "dom-auto",
+        "dom-arch",
+        "dom-data"
+      ],
+      "links": [],
+      "notes": "Текущая основная позиция."
+    },
+    {
+      "id": "rec-act-course-1",
+      "type": "Activity",
+      "activityType": "Course",
+      "createdAt": "2026-11-24T05:00:00.000Z",
+      "updatedAt": "2026-11-24T05:00:00.000Z",
+      "title": "Курс: Архитектура распределённых систем и Apache Kafka",
+      "description": "Углублённый практический курс по проектированию отказоустойчивых брокеров сообщений.",
+      "startDate": "2024-03-01",
+      "endDate": "2024-05-25",
+      "organizer": "HighLoad Academy",
+      "format": "Online",
+      "topics": "Партиционирование, репликация, Exactly-once semantics, Schema Registry",
+      "takeaways": "Научился моделировать сетевые разделения и проверять поведение сервисов при дублировании сообщений.",
+      "domainIds": [
+        "dom-arch",
+        "dom-data"
+      ],
+      "links": [],
+      "notes": ""
+    },
+    {
+      "id": "rec-act-conf-1",
+      "type": "Activity",
+      "activityType": "Conference",
+      "createdAt": "2026-11-24T05:00:00.000Z",
+      "updatedAt": "2026-11-24T05:00:00.000Z",
+      "title": "Конференция Heisenbug — Доклад про AI в тестировании",
+      "description": "Участие в профильной конференции по тестированию, фокус на генерации тест-кейсов и самовосстанавливающихся локаторах.",
+      "startDate": "2025-04-12",
+      "endDate": "2025-04-13",
+      "organizer": "JUG Ru Group",
+      "format": "Offline",
+      "topics": "LLM-агенты в QA, контрактное тестирование, observability",
+      "takeaways": "Идея использовать локальные модели для анализа логов падения ночных сборок.",
+      "domainIds": [
+        "dom-qa",
+        "dom-auto"
+      ],
+      "links": [],
+      "notes": "Отображается как точечное событие (2 дня)."
+    },
+    {
+      "id": "rec-act-web-1",
+      "type": "Activity",
+      "activityType": "Webinar",
+      "createdAt": "2026-11-24T05:00:00.000Z",
+      "updatedAt": "2026-11-24T05:00:00.000Z",
+      "title": "Вебинар: Автоматизация проверок доступности (WCAG 2.2)",
+      "description": "Разбор интеграции axe-core в пайплайны Playwright.",
+      "startDate": "2025-10-18",
+      "endDate": "2025-10-18",
+      "organizer": "A11y Community",
+      "format": "Online",
+      "topics": "ARIA-атрибуты, контрастность, клавиатурная навигация",
+      "takeaways": "Добавил базовый аудит доступности в свой пет-проект.",
+      "domainIds": [
+        "dom-a11y",
+        "dom-auto"
+      ],
+      "links": [],
+      "notes": ""
+    },
+    {
+      "id": "rec-act-study-1",
+      "type": "Activity",
+      "activityType": "Self-study",
+      "createdAt": "2026-11-24T05:00:00.000Z",
+      "updatedAt": "2026-11-24T05:00:00.000Z",
+      "title": "Изучение Kubernetes и Helm для тестовых окружений",
+      "description": "Развёртывание локального кластера Minikube/Kind, написание манифестов для изолированных стендов.",
+      "startDate": "2024-11-01",
+      "endDate": "2025-01-20",
+      "organizer": "Самостоятельно",
+      "format": "Online",
+      "topics": "Pods, Services, Ingress, ConfigMaps, Helm Charts",
+      "takeaways": "Смог перевести запуск E2E-тестов в динамические неймспейсы на каждый Merge Request.",
+      "domainIds": [
+        "dom-arch"
+      ],
+      "links": [],
+      "notes": ""
+    },
+    {
+      "id": "rec-act-exp-1",
+      "type": "Activity",
+      "activityType": "Experiment",
+      "createdAt": "2026-11-24T05:00:00.000Z",
+      "updatedAt": "2026-11-24T05:00:00.000Z",
+      "title": "Эксперимент: AI-классификатор падений автотестов",
+      "description": "Прототип скрипта на Python, который группирует упавшие тесты по стектрейсу и определяет флаки-тесты.",
+      "startDate": "2026-02-01",
+      "endDate": "2026-03-15",
+      "organizer": "R&D Lab",
+      "format": "Online",
+      "topics": "Embeddings, кластеризация ошибок, Python AST",
+      "takeaways": "Точность определения инфраструктурных сбоев составила 88%.",
+      "domainIds": [
+        "dom-auto",
+        "dom-data"
+      ],
+      "links": [],
+      "notes": ""
+    },
+    {
+      "id": "rec-proj-1",
+      "type": "Project",
+      "projectType": "Educational",
+      "status": "Completed",
+      "createdAt": "2026-11-24T05:00:00.000Z",
+      "updatedAt": "2026-11-24T05:00:00.000Z",
+      "title": "Учебный фреймворк UI + API на Playwright",
+      "description": "Стартовый шаблон автотестов с генерацией отчётов Allure и запуском в Docker.",
+      "startDate": "2023-01-15",
+      "endDate": "2023-04-20",
+      "goals": "Освоить современный стек автоматизации на TypeScript.",
+      "tasks": "Реализовать Page Object Model, API-клиент и авторизацию через storageState.",
+      "results": "Успешно защищён как выпускной проект, лёг в основу тестового фреймворка на работе.",
+      "domainIds": [
+        "dom-auto"
+      ],
+      "links": [],
+      "notes": ""
+    },
+    {
+      "id": "rec-proj-2",
+      "type": "Project",
+      "projectType": "Personal",
+      "status": "Archived",
+      "createdAt": "2026-11-24T05:00:00.000Z",
+      "updatedAt": "2026-11-24T05:00:00.000Z",
+      "title": "CLI-утилита для генерации синтетических SQL-данных",
+      "description": "Инструмент на Python для быстрого наполнения тестовых баз PostgreSQL связными данными.",
+      "startDate": "2023-10-01",
+      "endDate": "2024-01-15",
+      "goals": "Ускорить подготовку тестовых данных перед нагрузочным тестированием.",
+      "tasks": "Парсинг схемы БД, генерация 1 млн записей с сохранением внешних ключей.",
+      "results": "Сократил время подготовки стенда с полудня до 40 секунд.",
+      "domainIds": [
+        "dom-data",
+        "dom-qa"
+      ],
+      "links": [],
+      "notes": ""
+    },
+    {
+      "id": "rec-proj-3",
+      "type": "Project",
+      "projectType": "Commercial",
+      "status": "Completed",
+      "createdAt": "2026-11-24T05:00:00.000Z",
+      "updatedAt": "2026-11-24T05:00:00.000Z",
+      "title": "Миграция регрессионного сьюта в Kubernetes",
+      "description": "Внутренний инфраструктурный проект по переносу 1200 автотестов на динамические воркеры.",
+      "startDate": "2025-05-01",
+      "endDate": "2025-09-30",
+      "goals": "Убрать очередь ожидания тестовых стендов между командами разработки.",
+      "tasks": "Настройка Helm-чартов, балансировка шардов тестов в CI/CD.",
+      "results": "12 параллельных воркеров, полный регресс выполняется за 11 минут.",
+      "domainIds": [
+        "dom-arch",
+        "dom-auto"
+      ],
+      "links": [],
+      "notes": ""
+    },
+    {
+      "id": "rec-proj-4",
+      "type": "Project",
+      "projectType": "Personal",
+      "status": "In Progress",
+      "createdAt": "2026-11-24T05:00:00.000Z",
+      "updatedAt": "2026-11-24T05:00:00.000Z",
+      "title": "Engineering Lab — Система моделирования компетенций",
+      "description": "Локальное веб-приложение с независимой моделью профессиональных данных, Career Timeline и картой компетенций.",
+      "startDate": "2026-08-15",
+      "endDate": null,
+      "goals": "Создать переносимое ядро данных (Data Core) и визуализацию профессионального роста.",
+      "tasks": "Реализовать MVP 1.0 (Career Timeline), затем Knowledge Graph и Competency Map.",
+      "results": "Работающий прототип на чистом HTML/CSS/JS с неоновым техническим UI.",
+      "domainIds": [
+        "dom-arch",
+        "dom-a11y"
+      ],
+      "links": [],
+      "notes": "Активная разработка."
+    }
+  ],
+  "recordTechnologies": [
+    {
+      "id": "link-3",
+      "record_id": "rec-act-1",
+      "technology_id": "tech-kafka",
+      "proficiency_level": "Studied",
+      "relevance": "Primary",
+      "evidence_type": "Self-study",
+      "notes": "Теоретическая база перед внедрением на проекте"
+    },
+    {
+      "id": "l25-1",
+      "record_id": "rec-2025-exp-1",
+      "technology_id": "tech-ts",
+      "proficiency_level": "Professional",
+      "relevance": "Primary",
+      "evidence_type": "Professional Work",
+      "notes": "Архитектура фреймворка"
+    },
+    {
+      "id": "l25-2",
+      "record_id": "rec-2025-exp-1",
+      "technology_id": "tech-25-pw",
+      "proficiency_level": "Professional",
+      "relevance": "Primary",
+      "evidence_type": "Professional Work",
+      "notes": "Миграция с устаревшего стека"
+    },
+    {
+      "id": "l25-3",
+      "record_id": "rec-2025-exp-2",
+      "technology_id": "tech-25-grafana",
+      "proficiency_level": "Applied",
+      "relevance": "Primary",
+      "evidence_type": "Professional Work",
+      "notes": "Дашборды стабильности"
+    },
+    {
+      "id": "l25-4",
+      "record_id": "rec-2025-exp-2",
+      "technology_id": "tech-25-redis",
+      "proficiency_level": "Applied",
+      "relevance": "Secondary",
+      "evidence_type": "Professional Work",
+      "notes": "Тестирование кэширования"
+    },
+    {
+      "id": "l25-5",
+      "record_id": "rec-2025-act-1",
+      "technology_id": "tech-25-grafana",
+      "proficiency_level": "Studied",
+      "relevance": "Primary",
+      "evidence_type": "Course",
+      "notes": "Изучение PromQL и панелей"
+    },
+    {
+      "id": "l25-6",
+      "record_id": "rec-2025-proj-1",
+      "technology_id": "tech-25-grpc",
+      "proficiency_level": "Professional",
+      "relevance": "Primary",
+      "evidence_type": "Professional Work",
+      "notes": "Генератор контрактных тестов"
+    },
+    {
+      "id": "l25-7",
+      "record_id": "rec-2025-proj-1",
+      "technology_id": "tech-ts",
+      "proficiency_level": "Professional",
+      "relevance": "Primary",
+      "evidence_type": "Professional Work",
+      "notes": "Строгая типизация proto-схем"
+    },
+    {
+      "id": "l25-8",
+      "record_id": "rec-2025-act-2",
+      "technology_id": "tech-25-grpc",
+      "proficiency_level": "Professional",
+      "relevance": "Primary",
+      "evidence_type": "Conference/Webinar",
+      "notes": "Доклад на конференции"
+    },
+    {
+      "id": "l25-9",
+      "record_id": "rec-2025-act-3",
+      "technology_id": "tech-25-redis",
+      "proficiency_level": "Practiced",
+      "relevance": "Primary",
+      "evidence_type": "Self-study",
+      "notes": "Моделирование сбоев кластера"
+    },
+    {
+      "id": "l25-10",
+      "record_id": "rec-2025-proj-2",
+      "technology_id": "tech-25-docker",
+      "proficiency_level": "Professional",
+      "relevance": "Primary",
+      "evidence_type": "Personal Project",
+      "notes": "Оркестрация тестовых стендов"
+    },
+    {
+      "id": "l25-11",
+      "record_id": "rec-2025-proj-2",
+      "technology_id": "tech-25-python",
+      "proficiency_level": "Applied",
+      "relevance": "Primary",
+      "evidence_type": "Personal Project",
+      "notes": "CLI-обёртка"
+    },
+    {
+      "id": "l25-12",
+      "record_id": "rec-2025-act-4",
+      "technology_id": "tech-25-docker",
+      "proficiency_level": "Practiced",
+      "relevance": "Secondary",
+      "evidence_type": "Conference/Webinar",
+      "notes": "Chaos-инжекция в контейнеры"
+    },
+    {
+      "id": "l25-13",
+      "record_id": "rec-2025-act-5",
+      "technology_id": "tech-25-ai",
+      "proficiency_level": "Applied",
+      "relevance": "Primary",
+      "evidence_type": "Experiment",
+      "notes": "Генерация негативных кейсов"
+    },
+    {
+      "id": "l25-14",
+      "record_id": "rec-2025-act-5",
+      "technology_id": "tech-25-python",
+      "proficiency_level": "Applied",
+      "relevance": "Secondary",
+      "evidence_type": "Experiment",
+      "notes": "Скрипт валидации OpenAPI"
+    },
+    {
+      "id": "l25-15",
+      "record_id": "rec-2025-proj-3",
+      "technology_id": "tech-25-grafana",
+      "proficiency_level": "Professional",
+      "relevance": "Primary",
+      "evidence_type": "Professional Work",
+      "notes": "Release Quality Gate"
+    },
+    {
+      "id": "l25-16",
+      "record_id": "rec-2025-proj-3",
+      "technology_id": "tech-25-pw",
+      "proficiency_level": "Professional",
+      "relevance": "Secondary",
+      "evidence_type": "Professional Work",
+      "notes": "Экспорт метрик прогонов"
+    },
+    {
+      "id": "l-1",
+      "record_id": "rec-exp-1",
+      "technology_id": "tech-sql",
+      "proficiency_level": "Practiced",
+      "relevance": "Primary",
+      "evidence_type": "Professional Work",
+      "notes": "Сложные JOIN-запросы для сверки данных"
+    },
+    {
+      "id": "l-2",
+      "record_id": "rec-exp-1",
+      "technology_id": "tech-js",
+      "proficiency_level": "Studied",
+      "relevance": "Background",
+      "evidence_type": "Professional Work",
+      "notes": "Скрипты в Postman"
+    },
+    {
+      "id": "l-3",
+      "record_id": "rec-exp-2",
+      "technology_id": "tech-ts",
+      "proficiency_level": "Applied",
+      "relevance": "Primary",
+      "evidence_type": "Professional Work",
+      "notes": "Основной язык E2E-фреймворка"
+    },
+    {
+      "id": "l-4",
+      "record_id": "rec-exp-2",
+      "technology_id": "tech-wdio",
+      "proficiency_level": "Professional",
+      "relevance": "Primary",
+      "evidence_type": "Professional Work",
+      "notes": "Поддержка 600+ UI-тестов"
+    },
+    {
+      "id": "l-5",
+      "record_id": "rec-exp-2",
+      "technology_id": "tech-ci",
+      "proficiency_level": "Applied",
+      "relevance": "Secondary",
+      "evidence_type": "Professional Work",
+      "notes": "Настройка GitLab CI пайплайнов"
+    },
+    {
+      "id": "l-6",
+      "record_id": "rec-exp-3",
+      "technology_id": "tech-ts",
+      "proficiency_level": "Professional",
+      "relevance": "Primary",
+      "evidence_type": "Professional Work",
+      "notes": "Архитектура тестовых библиотек"
+    },
+    {
+      "id": "l-7",
+      "record_id": "rec-exp-3",
+      "technology_id": "tech-kafka",
+      "proficiency_level": "Professional",
+      "relevance": "Primary",
+      "evidence_type": "Professional Work",
+      "notes": "Тестирование событийных потоков"
+    },
+    {
+      "id": "l-8",
+      "record_id": "rec-exp-3",
+      "technology_id": "tech-k8s",
+      "proficiency_level": "Applied",
+      "relevance": "Secondary",
+      "evidence_type": "Professional Work",
+      "notes": "Управление тестовыми неймспейсами"
+    },
+    {
+      "id": "l-9",
+      "record_id": "rec-act-course-1",
+      "technology_id": "tech-kafka",
+      "proficiency_level": "Studied",
+      "relevance": "Primary",
+      "evidence_type": "Course",
+      "notes": "Глубокая теория брокеров"
+    },
+    {
+      "id": "l-10",
+      "record_id": "rec-act-conf-1",
+      "technology_id": "tech-25-ai",
+      "proficiency_level": "Exposed",
+      "relevance": "Primary",
+      "evidence_type": "Conference/Webinar",
+      "notes": "Первое знакомство с LLM-агентами в QA"
+    },
+    {
+      "id": "l-11",
+      "record_id": "rec-act-web-1",
+      "technology_id": "tech-25-pw",
+      "proficiency_level": "Applied",
+      "relevance": "Secondary",
+      "evidence_type": "Conference/Webinar",
+      "notes": "Интеграция axe-core"
+    },
+    {
+      "id": "l-12",
+      "record_id": "rec-act-study-1",
+      "technology_id": "tech-k8s",
+      "proficiency_level": "Practiced",
+      "relevance": "Primary",
+      "evidence_type": "Self-study",
+      "notes": "Локальный кластер и манифесты"
+    },
+    {
+      "id": "l-13",
+      "record_id": "rec-act-exp-1",
+      "technology_id": "tech-25-python",
+      "proficiency_level": "Applied",
+      "relevance": "Primary",
+      "evidence_type": "Experiment",
+      "notes": "ML-кластеризация логов"
+    },
+    {
+      "id": "l-14",
+      "record_id": "rec-act-exp-1",
+      "technology_id": "tech-25-ai",
+      "proficiency_level": "Practiced",
+      "relevance": "Primary",
+      "evidence_type": "Experiment",
+      "notes": "Работа с эмбеддингами"
+    },
+    {
+      "id": "l-15",
+      "record_id": "rec-proj-1",
+      "technology_id": "tech-25-pw",
+      "proficiency_level": "Applied",
+      "relevance": "Primary",
+      "evidence_type": "Personal Project",
+      "notes": "Выпускной проект"
+    },
+    {
+      "id": "l-16",
+      "record_id": "rec-proj-1",
+      "technology_id": "tech-ts",
+      "proficiency_level": "Practiced",
+      "relevance": "Primary",
+      "evidence_type": "Personal Project",
+      "notes": ""
+    },
+    {
+      "id": "l-17",
+      "record_id": "rec-proj-2",
+      "technology_id": "tech-25-python",
+      "proficiency_level": "Applied",
+      "relevance": "Primary",
+      "evidence_type": "Personal Project",
+      "notes": "Генератор данных"
+    },
+    {
+      "id": "l-18",
+      "record_id": "rec-proj-2",
+      "technology_id": "tech-sql",
+      "proficiency_level": "Professional",
+      "relevance": "Primary",
+      "evidence_type": "Personal Project",
+      "notes": "Оптимизация массовых вставок"
+    },
+    {
+      "id": "l-19",
+      "record_id": "rec-proj-3",
+      "technology_id": "tech-k8s",
+      "proficiency_level": "Professional",
+      "relevance": "Primary",
+      "evidence_type": "Professional Work",
+      "notes": "Продакшн-кластер для CI"
+    },
+    {
+      "id": "l-20",
+      "record_id": "rec-proj-3",
+      "technology_id": "tech-ci",
+      "proficiency_level": "Professional",
+      "relevance": "Primary",
+      "evidence_type": "Professional Work",
+      "notes": "Шардирование прогонов"
+    },
+    {
+      "id": "l-21",
+      "record_id": "rec-proj-4",
+      "technology_id": "tech-js",
+      "proficiency_level": "Professional",
+      "relevance": "Primary",
+      "evidence_type": "Personal Project",
+      "notes": "Архитектура Data Core и Timeline"
+    }
+  ]
+}

@@ -1,0 +1,199 @@
+.timeline-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  border-bottom: 1px solid var(--border-subtle);
+  background: rgba(12, 17, 29, 0.78);
+  backdrop-filter: blur(8px);
+}
+
+.zoom-controls, .legend {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.timeline-canvas {
+  flex: 1;
+  overflow: auto;
+  position: relative;
+  cursor: grab;
+}
+
+.tl-track {
+  position: relative;
+  min-width: 100%;
+  min-height: 100%;
+}
+
+/* Изумрудный спокойный градиент полосы календаря */
+.tl-axis {
+  position: sticky;
+  top: 0;
+  height: 36px;
+  background: linear-gradient(90deg, rgba(16, 185, 129, 0.16), rgba(5, 150, 105, 0.08), rgba(12, 17, 29, 0.94));
+  border-bottom: 1.5px solid rgba(16, 185, 129, 0.5);
+  box-shadow: 0 4px 16px rgba(16, 185, 129, 0.1);
+  backdrop-filter: blur(8px);
+  z-index: 6;
+}
+
+/* Яркие вертикальные линии годов */
+.tl-year-marker {
+  position: absolute;
+  top: 0;
+  border-left: 1.5px dashed rgba(16, 185, 129, 0.45);
+  box-shadow: -1px 0 8px rgba(16, 185, 129, 0.12);
+  padding-left: 8px;
+  pointer-events: none;
+}
+
+.tl-year-marker span {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  color: #6ee7b7;
+  line-height: 36px;
+  text-shadow: 0 0 10px rgba(16, 185, 129, 0.45);
+}
+
+.tl-month-marker {
+  border-left: 1px dashed rgba(148, 163, 184, 0.22);
+  box-shadow: none;
+}
+
+.tl-month-marker span {
+  font-size: 10px;
+  font-weight: 500;
+  color: #94a3b8;
+  text-shadow: none;
+}
+
+/* Заголовки секций на шкале */
+.tl-divider {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: 4px 14px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  pointer-events: none;
+}
+
+.tl-divider--exp {
+  border-top: 1px solid rgba(56, 189, 248, 0.35);
+  background: linear-gradient(90deg, rgba(56, 189, 248, 0.1), transparent 40%);
+  color: #7dd3fc;
+}
+
+.tl-divider--sub {
+  border-top: 1px solid rgba(168, 85, 247, 0.35);
+  background: linear-gradient(90deg, rgba(168, 85, 247, 0.1), transparent 40%);
+  color: #d8b4fe;
+}
+
+/* Карточки на шкале */
+.tl-item {
+  position: absolute;
+  height: 32px;
+  border-radius: 5px;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  backdrop-filter: blur(6px);
+  z-index: 3;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease, border-color 0.15s ease;
+}
+
+.tl-item:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.12);
+  z-index: 10;
+}
+
+.tl-item--experience {
+  background: linear-gradient(90deg, rgba(56, 189, 248, 0.22), rgba(2, 132, 199, 0.12));
+  border: 1px solid rgba(56, 189, 248, 0.7);
+  border-left: 4px solid var(--accent-cyan);
+  color: #f0f9ff;
+  box-shadow: 0 4px 12px rgba(56, 189, 248, 0.16);
+}
+
+.tl-item--project {
+  background: linear-gradient(90deg, rgba(168, 85, 247, 0.22), rgba(126, 34, 206, 0.12));
+  border: 1px solid rgba(168, 85, 247, 0.7);
+  border-left: 4px solid var(--accent-violet);
+  color: #faf5ff;
+  box-shadow: 0 4px 12px rgba(168, 85, 247, 0.16);
+}
+
+.tl-item--activity {
+  background: linear-gradient(90deg, rgba(16, 185, 129, 0.22), rgba(5, 150, 105, 0.12));
+  border: 1px solid rgba(16, 185, 129, 0.7);
+  border-left: 4px solid var(--accent-emerald);
+  color: #ecfdf5;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.16);
+}
+
+/* Выделенная (активная) карточка — более тёмный, глубокий и насыщенный цвет без белой рамки */
+.tl-item--selected {
+  transform: translateY(-2px);
+  z-index: 15 !important;
+}
+
+.tl-item--experience.tl-item--selected {
+  background: linear-gradient(90deg, #06283d, #0a3d5c);
+  border: 1.5px solid #38bdf8;
+  border-left: 5px solid #38bdf8;
+  color: #ffffff;
+  box-shadow: 0 0 22px rgba(56, 189, 248, 0.55), inset 0 0 12px rgba(56, 189, 248, 0.25);
+}
+
+.tl-item--project.tl-item--selected {
+  background: linear-gradient(90deg, #270e45, #3b1566);
+  border: 1.5px solid #a855f7;
+  border-left: 5px solid #a855f7;
+  color: #ffffff;
+  box-shadow: 0 0 22px rgba(168, 85, 247, 0.55), inset 0 0 12px rgba(168, 85, 247, 0.25);
+}
+
+.tl-item--activity.tl-item--selected {
+  background: linear-gradient(90deg, #052e22, #084735);
+  border: 1.5px solid #10b981;
+  border-left: 5px solid #10b981;
+  color: #ffffff;
+  box-shadow: 0 0 22px rgba(16, 185, 129, 0.55), inset 0 0 12px rgba(16, 185, 129, 0.25);
+}
+
+
+/* Точечные события */
+.tl-item--point {
+  border-radius: 50%;
+  padding: 0;
+  width: 14px !important;
+  height: 14px !important;
+  margin-top: 9px;
+  overflow: visible;
+  border-left-width: 1px;
+}
+
+.tl-item--point .tl-item__label {
+  position: absolute;
+  left: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-primary);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.85);
+}

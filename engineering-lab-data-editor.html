@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Engineering Lab — Data Editor</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23060911'/%3E%3Crect x='16' y='16' width='32' height='32' rx='6' fill='%230f172a' stroke='%2338bdf8' stroke-width='3'/%3E%3Ccircle cx='32' cy='32' r='6' fill='%2338bdf8'/%3E%3Cpath d='M24 8v8M32 8v8M40 8v8M24 48v8M32 48v8M40 48v8M8 24h8M8 32h8M8 40h8M48 24h8M48 32h8M48 40h8' stroke='%2338bdf8' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E" />
+  <style>
+    :root {
+      --bg-base: #060911;
+      --surface: rgba(13, 19, 33, 0.84);
+      --border: rgba(56, 189, 248, 0.18);
+      --border-focus: #38bdf8;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #0ea5e9;
+      --danger: #f43f5e;
+      --success: #10b981;
+      --radius: 10px;
+      color-scheme: dark;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif;
+      background-color: var(--bg-base);
+      color: var(--text-main);
+      line-height: 1.5;
+      min-height: 100vh;
+      padding: 32px 16px 64px;
+      background-attachment: fixed;
+      /* Голубая топология микросхемы (Base64 SVG) + глубокое голубое свечение */
+      background-image:
+        radial-gradient(circle at 20% 25%, rgba(56, 189, 248, 0.16) 0%, transparent 48%),
+        radial-gradient(circle at 80% 75%, rgba(2, 132, 199, 0.14) 0%, transparent 50%),
+        url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjEyMCIgdmlld0JveD0iMCAwIDEyMCAxMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMzhiZGY4IiBzdHJva2Utb3BhY2l0eT0iMC4xMiIgc3Ryb2tlLXdpZHRoPSIxLjIiPjxwYXRoIGQ9Ik0wIDIwaDMwbDE1IDE1aDMwbDE1LTE1aDMwIi8+PHBhdGggZD0iTTAgOTBoMjBsMTUtMTVoNDBsMTUgMTVoMzAiLz48cGF0aCBkPSJNMjAgMHYyMGwxNSAxNXY0MGwtMTUgMTV2MzAiLz48cGF0aCBkPSJNMTAwIDB2MzBsLTE1IDE1djMwbDE1IDE1djMwIi8+PGNpcmNsZSBjeD0iMzAiIGN5PSIyMCIgcj0iMi41IiBmaWxsPSIjMDYwOTExIi8+PGNpcmNsZSBjeD0iNzUiIGN5PSIzNSIgcj0iMi41IiBmaWxsPSIjMzhiZGY4IiBmaWxsLW9wYWNpdHk9IjAuMjUiLz48Y2lyY2xlIGN5PSI3NSIgY3g9IjM1IiByPSIyLjUiIGZpbGw9IiMwNjA5MTEiLz48Y2lyY2xlIGN4PSI4NSIgY3k9IjYwIiByPSIzIiBmaWxsPSIjMzhiZGY4IiBmaWxsLW9wYWNpdHk9IjAuMiIvPjwvZz48L3N2Zz4=");
+      background-size: 100% 100%, 100% 100%, 120px 120px;
+    }
+
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    header {
+      margin-bottom: 28px;
+    }
+
+    .brand {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+
+    h1 {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    .card {
+      background: var(--surface);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-bottom: 20px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+    }
+
+    /* Цветные заголовки разделов */
+    .section-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 18px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.14);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .sec-badge {
+      font-family: "JetBrains Mono", Consolas, monospace;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 5px;
+    }
+
+    .sec-01 { color: #38bdf8; border-bottom-color: rgba(56, 189, 248, 0.25); }
+    .sec-01 .sec-badge { background: rgba(56, 189, 248, 0.15); border: 1px solid rgba(56, 189, 248, 0.35); }
+
+    .sec-02 { color: #34d399; border-bottom-color: rgba(52, 211, 153, 0.25); }
+    .sec-02 .sec-badge { background: rgba(52, 211, 153, 0.15); border: 1px solid rgba(52, 211, 153, 0.35); }
+
+    .sec-03 { color: #a78bfa; border-bottom-color: rgba(167, 139, 250, 0.25); }
+    .sec-03 .sec-badge { background: rgba(167, 139, 250, 0.15); border: 1px solid rgba(167, 139, 250, 0.35); }
+
+    /* 4 заголовок группы — розовый */
+    .sec-04 { color: #f472b6; border-bottom-color: rgba(244, 114, 182, 0.28); }
+    .sec-04 .sec-badge { background: rgba(244, 114, 182, 0.16); border: 1px solid rgba(244, 114, 182, 0.38); color: #f472b6; }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+    }
+
+    @media (max-width: 640px) {
+      .grid-2, .grid-3 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .field {
+      margin-bottom: 16px;
+    }
+
+    .field:last-child {
+      margin-bottom: 0;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-main);
+      margin-bottom: 6px;
+    }
+
+    .req {
+      color: var(--danger);
+    }
+
+    .hint {
+      display: block;
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .input, select, textarea {
+      width: 100%;
+      background: rgba(6, 9, 17, 0.78);
+      border: 1px solid rgba(148, 163, 184, 0.22);
+      border-radius: 7px;
+      padding: 10px 12px;
+      color: var(--text-main);
+      font-size: 14px;
+      font-family: inherit;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    input[type="date"] {
+      color-scheme: dark;
+      cursor: pointer;
+    }
+
+    input[type="date"]::-webkit-calendar-picker-indicator {
+      cursor: pointer;
+      filter: invert(0.85) sepia(1) saturate(4) hue-rotate(170deg);
+      opacity: 0.85;
+    }
+
+    input[type="date"]::-webkit-calendar-picker-indicator:hover {
+      opacity: 1;
+    }
+
+    .input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--border-focus);
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
+    }
+
+    .input:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    .input.invalid {
+      border-color: var(--danger);
+      box-shadow: 0 0 0 3px rgba(244, 63, 94, 0.18);
+    }
+
+    textarea {
+      min-height: 84px;
+      resize: vertical;
+    }
+
+    .checkbox-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 8px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .checkbox-row input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      accent-color: var(--accent);
+      cursor: pointer;
+    }
+
+    .tech-card {
+      background: rgba(6, 9, 17, 0.55);
+      border: 1px solid rgba(167, 139, 250, 0.22);
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 12px;
+    }
+
+    .tech-header {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 12px;
+      align-items: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 10px 16px;
+      border-radius: 7px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #060911;
+      font-weight: 600;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-hover);
+    }
+
+    .btn-secondary {
+      background: rgba(56, 189, 248, 0.1);
+      border-color: rgba(56, 189, 248, 0.28);
+      color: var(--accent);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(56, 189, 248, 0.18);
+    }
+
+    .btn-ghost {
+      background: rgba(148, 163, 184, 0.08);
+      border-color: rgba(148, 163, 184, 0.2);
+      color: var(--text-main);
+    }
+
+    .btn-ghost:hover {
+      background: rgba(148, 163, 184, 0.15);
+    }
+
+    .btn-danger {
+      background: rgba(244, 63, 94, 0.12);
+      border-color: rgba(244, 63, 94, 0.3);
+      color: #fda4af;
+      padding: 8px 12px;
+    }
+
+    .btn-danger:hover {
+      background: rgba(244, 63, 94, 0.22);
+    }
+
+    .actions-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+      align-items: center;
+    }
+
+    /* Сообщение валидации рядом с кнопкой */
+    .action-feedback {
+      margin-top: 12px;
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      line-height: 1.45;
+      display: none;
+    }
+
+    .action-feedback.error {
+      display: block;
+      background: rgba(244, 63, 94, 0.15);
+      border: 1px solid rgba(244, 63, 94, 0.42);
+      color: #fecdd3;
+    }
+
+    .action-feedback.success {
+      display: block;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.42);
+      color: #a7f3d0;
+    }
+
+    .action-feedback ul {
+      margin: 6px 0 0 18px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .preview-box {
+      margin-top: 20px;
+    }
+
+    .preview-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    pre {
+      background: #04060c;
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      border-radius: 8px;
+      padding: 16px;
+      overflow-x: auto;
+      font-family: "JetBrains Mono", "Fira Code", Consolas, monospace;
+      font-size: 13px;
+      color: #7dd3fc;
+      max-height: 440px;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 12px;
+      margin-top: 32px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">Engineering Lab · Data Editor</div>
+      <h1 id="pageTitle">Карточка профессионального опыта</h1>
+      <p class="subtitle">Локальная форма для создания и редактирования записи. Экспортируемый JSON полностью совместим с Career Timeline.</p>
+    </header>
+
+    <!-- 01 / Основная информация -->
+    <section class="card">
+      <h2 class="section-title sec-01"><span class="sec-badge">01</span> Основная информация</h2>
+
+      <div class="grid-2 field">
+        <div>
+          <label for="recordType">Тип сущности <span class="req">*</span></label>
+          <select id="recordType" class="input">
+            <option value="Experience">Experience — Профессиональный опыт</option>
+            <option value="Activity">Activity — Обучение и активность</option>
+            <option value="Project">Project — Проект</option>
+          </select>
+        </div>
+        <div>
+          <label for="recordId">ID записи (постоянный)</label>
+          <input type="text" id="recordId" class="input" readonly />
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="title">Название / Заголовок <span class="req">*</span></label>
+        <input type="text" id="title" class="input" placeholder="Например: Senior Backend Engineer или Разработка ETL-пайплайна" />
+      </div>
+
+      <div id="sec01Dynamic"></div>
+
+      <div class="grid-2 field" style="margin-top: 16px;">
+        <div>
+          <label for="startDate">Дата начала <span class="req">*</span></label>
+          <input type="date" id="startDate" class="input" />
+        </div>
+        <div>
+          <label for="endDate">Дата окончания</label>
+          <input type="date" id="endDate" class="input" />
+        </div>
+      </div>
+    </section>
+
+    <!-- 02 / Содержание -->
+    <section class="card">
+      <h2 class="section-title sec-02"><span class="sec-badge">02</span> Содержание</h2>
+
+      <div class="field">
+        <label for="description">Краткое описание</label>
+        <textarea id="description" class="input" placeholder="Суть роли, проекта или мероприятия в 2–3 предложениях"></textarea>
+      </div>
+
+      <div id="sec02Dynamic"></div>
+    </section>
+
+    <!-- 03 / Навыки, технологии и уровень взаимодействия -->
+    <section class="card">
+      <h2 class="section-title sec-03"><span class="sec-badge">03</span> Навыки, технологии и уровень взаимодействия</h2>
+      <p class="subtitle" style="margin-bottom: 14px;">Добавь навыки и технологии, которые применялись в записи, и укажи уровень освоения в этом контексте.</p>
+
+      <div id="techList"></div>
+      <button type="button" id="btnAddTech" class="btn btn-secondary">＋ Добавить технологию</button>
+    </section>
+
+    <!-- 04 / Направления и ссылки (розовый заголовок) -->
+    <section class="card">
+      <h2 class="section-title sec-04"><span class="sec-badge">04</span> Направления и ссылки</h2>
+
+      <div class="field">
+        <label for="domains">Предметные области (Domains)</label>
+        <input type="text" id="domains" class="input" placeholder="Backend, Distributed Systems, FinTech" />
+        <span class="hint">Перечисли через запятую. При импорте автоматически свяжутся со справочником.</span>
+      </div>
+
+      <div class="grid-2 field">
+        <div>
+          <label for="linkSource">Ссылка на событие / репозиторий / компанию</label>
+          <input type="url" id="linkSource" class="input" placeholder="https://..." />
+        </div>
+        <div>
+          <label for="linkMaterials">Ссылка на материалы / разбор</label>
+          <input type="url" id="linkMaterials" class="input" placeholder="https://..." />
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="notes">Личные заметки</label>
+        <textarea id="notes" class="input" placeholder="Приватные комментарии, инсайты, контекст для себя"></textarea>
+      </div>
+
+      <div class="field">
+        <label for="visibility">Видимость (для будущих профилей)</label>
+        <select id="visibility" class="input">
+          <option value="Private">Private</option>
+          <option value="Public">Public</option>
+        </select>
+      </div>
+    </section>
+
+    <div class="actions-bar">
+      <button type="button" id="btnDownloadJson" class="btn btn-primary">Скачать JSON</button>
+      <button type="button" id="btnTogglePreview" class="btn btn-secondary">Показать / скрыть JSON</button>
+      <button type="button" id="btnUploadJson" class="btn btn-ghost">Загрузить JSON для редактирования</button>
+      <button type="button" id="btnResetForm" class="btn btn-danger">Очистить форму</button>
+      <input type="file" id="jsonFileInput" accept=".json,application/json" class="hidden" />
+    </div>
+
+    <!-- Сообщение валидации / статуса прямо рядом с кнопками -->
+    <div id="actionFeedback" class="action-feedback" role="alert"></div>
+
+    <section id="previewSection" class="card preview-box hidden">
+      <div class="preview-header">
+        <span style="font-size: 13px; font-weight: 600; color: var(--accent);">JSON Preview (Schema v1.0.0)</span>
+        <button type="button" id="btnCopyJson" class="btn btn-secondary" style="padding: 6px 12px; font-size: 13px;">Скопировать JSON</button>
+      </div>
+      <pre id="jsonPreview"></pre>
+    </section>
+
+    <footer>
+      Engineering Lab · локальный инструмент. Данные не отправляются в интернет.
+    </footer>
+  </div>
+
+  <script>
+    const PROFICIENCY_LEVELS = [
+      { value: 'Exposed', label: 'Знакомство (Exposed)' },
+      { value: 'Studied', label: 'Изучено в теории (Studied)' },
+      { value: 'Practiced', label: 'Практика (Practiced)' },
+      { value: 'Applied', label: 'Применено в проекте (Applied)' },
+      { value: 'Professional', label: 'Профессионально (Professional)' }
+    ];
+
+    const RELEVANCE_LEVELS = ['Primary', 'Secondary', 'Background'];
+    const EVIDENCE_TYPES = [
+      'Professional Work',
+      'Personal Project',
+      'Experiment',
+      'Course',
+      'Conference/Webinar',
+      'Self-study'
+    ];
+
+    const recordTypeEl = document.getElementById('recordType');
+    const recordIdEl = document.getElementById('recordId');
+    const sec01Dynamic = document.getElementById('sec01Dynamic');
+    const sec02Dynamic = document.getElementById('sec02Dynamic');
+    const techListEl = document.getElementById('techList');
+    const jsonPreviewEl = document.getElementById('jsonPreview');
+    const feedbackEl = document.getElementById('actionFeedback');
+
+    let createdAt = new Date().toISOString();
+    let techRows = [];
+
+    function showFeedback(htmlMessage, type = 'error') {
+      feedbackEl.innerHTML = htmlMessage;
+      feedbackEl.className = 'action-feedback ' + type;
+    }
+
+    function clearFeedback() {
+      feedbackEl.className = 'action-feedback';
+      feedbackEl.innerHTML = '';
+    }
+
+    function newId(prefix) {
+      const uid = (typeof crypto !== 'undefined' && crypto.randomUUID)
+        ? crypto.randomUUID().slice(0, 8)
+        : Math.random().toString(36).substring(2, 10);
+      return prefix + '-' + uid;
+    }
+
+    function slugify(text, prefix) {
+      const normalized = text
+        .trim()
+        .toLowerCase()
+        .replace(/\+\+/g, 'pp')
+        .replace(/#/g, 'sharp')
+        .replace(/\./g, 'dot')
+        .replace(/[^a-z0-9а-яё]+/gi, '-')
+        .replace(/^-+|-+$/g, '');
+      return prefix + '-' + (normalized || newId('item'));
+    }
+
+    function syncEndDateState() {
+      const isCurrentEl = document.getElementById('isCurrent');
+      const endDateEl = document.getElementById('endDate');
+      if (isCurrentEl && isCurrentEl.checked) {
+        endDateEl.value = '';
+        endDateEl.disabled = true;
+      } else {
+        endDateEl.disabled = false;
+      }
+    }
+
+    function renderDynamicFields(type, data = {}) {
+      const titles = {
+        Experience: 'Карточка профессионального опыта',
+        Activity: 'Карточка активности и обучения',
+        Project: 'Карточка проекта'
+      };
+      document.getElementById('pageTitle').textContent = titles[type] || titles.Experience;
+
+      sec01Dynamic.innerHTML = '';
+      sec02Dynamic.innerHTML = '';
+
+      if (type === 'Experience') {
+        sec01Dynamic.innerHTML = `
+          <div class="grid-2 field">
+            <div>
+              <label for="company">Компания <span class="req">*</span></label>
+              <input type="text" id="company" class="input" placeholder="Название компании" />
+            </div>
+            <div>
+              <label for="role">Должность / Роль <span class="req">*</span></label>
+              <input type="text" id="role" class="input" placeholder="Например: Tech Lead / DevOps" />
+            </div>
+          </div>
+          <label class="checkbox-row">
+            <input type="checkbox" id="isCurrent" />
+            <span>Текущее место работы</span>
+          </label>
+        `;
+
+        sec02Dynamic.innerHTML = `
+          <div class="field">
+            <label for="responsibilities">Основные обязанности</label>
+            <textarea id="responsibilities" class="input" placeholder="Ключевые зоны ответственности и задачи"></textarea>
+          </div>
+          <div class="field">
+            <label for="achievements">Достижения и результаты</label>
+            <textarea id="achievements" class="input" placeholder="Измеримые результаты, метрики, внедрённые улучшения"></textarea>
+          </div>
+        `;
+
+        document.getElementById('company').value = data.company || '';
+        document.getElementById('role').value = data.role || '';
+        document.getElementById('isCurrent').checked = Boolean(data.isCurrent);
+        document.getElementById('responsibilities').value = data.responsibilities || '';
+        document.getElementById('achievements').value = data.achievements || '';
+
+        document.getElementById('isCurrent').addEventListener('change', () => {
+          syncEndDateState();
+          updatePreview();
+        });
+      } else if (type === 'Activity') {
+        const subTypes = ['Conference', 'Webinar', 'Course', 'Self-study', 'Experiment']
+          .map(st => `<option value="${st}">${st}</option>`).join('');
+        const formats = ['Online', 'Offline', 'Hybrid', 'Independent']
+          .map(f => `<option value="${f}">${f}</option>`).join('');
+
+        sec01Dynamic.innerHTML = `
+          <div class="grid-2 field">
+            <div>
+              <label for="activityType">Тип активности <span class="req">*</span></label>
+              <select id="activityType" class="input">${subTypes}</select>
+            </div>
+            <div>
+              <label for="format">Формат</label>
+              <select id="format" class="input">${formats}</select>
+            </div>
+          </div>
+          <div class="field">
+            <label for="organizer">Организатор / источник</label>
+            <input type="text" id="organizer" class="input" placeholder="Платформа, конференция, автор курса" />
+          </div>
+        `;
+
+        sec02Dynamic.innerHTML = `
+          <div class="field">
+            <label for="topics">Ключевые темы (через запятую)</label>
+            <input type="text" id="topics" class="input" placeholder="Архитектура, Kafka, Оптимизация БД" />
+          </div>
+          <div class="field">
+            <label for="takeaways">Мои выводы и наблюдения</label>
+            <textarea id="takeaways" class="input" placeholder="Что нового узнал и как это можно применить"></textarea>
+          </div>
+        `;
+
+        document.getElementById('activityType').value = data.activityType || 'Conference';
+        document.getElementById('format').value = data.format || 'Online';
+        document.getElementById('organizer').value = data.organizer || '';
+        document.getElementById('topics').value = data.topics || '';
+        document.getElementById('takeaways').value = data.takeaways || '';
+      } else {
+        const pTypes = ['Personal', 'Educational', 'Commercial']
+          .map(pt => `<option value="${pt}">${pt}</option>`).join('');
+        const statuses = ['In Progress', 'Completed', 'Planned', 'Archived']
+          .map(st => `<option value="${st}">${st}</option>`).join('');
+
+        sec01Dynamic.innerHTML = `
+          <div class="grid-2 field">
+            <div>
+              <label for="projectType">Тип проекта</label>
+              <select id="projectType" class="input">${pTypes}</select>
+            </div>
+            <div>
+              <label for="status">Статус</label>
+              <select id="status" class="input">${statuses}</select>
+            </div>
+          </div>
+        `;
+
+        sec02Dynamic.innerHTML = `
+          <div class="field">
+            <label for="goals">Цели проекта</label>
+            <textarea id="goals" class="input" placeholder="Какую проблему решал проект"></textarea>
+          </div>
+          <div class="field">
+            <label for="tasks">Задачи</label>
+            <textarea id="tasks" class="input" placeholder="Основные этапы реализации"></textarea>
+          </div>
+          <div class="field">
+            <label for="results">Результаты проекта</label>
+            <textarea id="results" class="input" placeholder="Итоговый результат, стек, выводы"></textarea>
+          </div>
+        `;
+
+        document.getElementById('projectType').value = data.projectType || 'Personal';
+        document.getElementById('status').value = data.status || 'In Progress';
+        document.getElementById('goals').value = data.goals || '';
+        document.getElementById('tasks').value = data.tasks || '';
+        document.getElementById('results').value = data.results || '';
+      }
+
+      syncEndDateState();
+      bindLiveInputs();
+      updatePreview();
+    }
+
+    function renderTechList() {
+      techListEl.innerHTML = '';
+
+      techRows.forEach((row, idx) => {
+        const card = document.createElement('div');
+        card.className = 'tech-card';
+
+        const lvlOpts = PROFICIENCY_LEVELS
+          .map(l => `<option value="${l.value}">${l.label}</option>`).join('');
+        const relOpts = RELEVANCE_LEVELS
+          .map(r => `<option value="${r}">${r}</option>`).join('');
+        const evOpts = EVIDENCE_TYPES
+          .map(ev => `<option value="${ev}">${ev}</option>`).join('');
+
+        card.innerHTML = `
+          <div class="tech-header">
+            <input type="text" class="input js-t-name" placeholder="Технология или навык (например: Python, Docker, System Design)" />
+            <button type="button" class="btn btn-danger js-t-del" title="Удалить">✕</button>
+          </div>
+          <div class="grid-3 field">
+            <div>
+              <label>Уровень освоения</label>
+              <select class="input js-t-lvl">${lvlOpts}</select>
+            </div>
+            <div>
+              <label>Значимость</label>
+              <select class="input js-t-rel">${relOpts}</select>
+            </div>
+            <div>
+              <label>Подтверждение</label>
+              <select class="input js-t-ev">${evOpts}</select>
+            </div>
+          </div>
+          <div class="field">
+            <input type="text" class="input js-t-note" placeholder="Контекст применения (необязательно)" />
+          </div>
+        `;
+
+        const nameInput = card.querySelector('.js-t-name');
+        const lvlSelect = card.querySelector('.js-t-lvl');
+        const relSelect = card.querySelector('.js-t-rel');
+        const evSelect = card.querySelector('.js-t-ev');
+        const noteInput = card.querySelector('.js-t-note');
+
+        nameInput.value = row.name || '';
+        lvlSelect.value = row.proficiency_level || 'Applied';
+        relSelect.value = row.relevance || 'Primary';
+        evSelect.value = row.evidence_type || 'Professional Work';
+        noteInput.value = row.notes || '';
+
+        nameInput.addEventListener('input', e => {
+          techRows[idx].name = e.target.value;
+          delete techRows[idx].techId;
+          updatePreview();
+        });
+        lvlSelect.addEventListener('change', e => {
+          techRows[idx].proficiency_level = e.target.value;
+          updatePreview();
+        });
+        relSelect.addEventListener('change', e => {
+          techRows[idx].relevance = e.target.value;
+          updatePreview();
+        });
+        evSelect.addEventListener('change', e => {
+          techRows[idx].evidence_type = e.target.value;
+          updatePreview();
+        });
+        noteInput.addEventListener('input', e => {
+          techRows[idx].notes = e.target.value;
+          updatePreview();
+        });
+        card.querySelector('.js-t-del').addEventListener('click', () => {
+          techRows.splice(idx, 1);
+          renderTechList();
+          updatePreview();
+        });
+
+        techListEl.appendChild(card);
+      });
+    }
+
+    function validateForm() {
+      document.querySelectorAll('.invalid').forEach(el => el.classList.remove('invalid'));
+      const errors = [];
+      let firstInvalid = null;
+
+      function markInvalid(el, msg) {
+        el.classList.add('invalid');
+        errors.push(msg);
+        if (!firstInvalid) firstInvalid = el;
+      }
+
+      const titleEl = document.getElementById('title');
+      const startEl = document.getElementById('startDate');
+      const endEl = document.getElementById('endDate');
+
+      if (!titleEl.value.trim()) {
+        markInvalid(titleEl, 'Заполните поле «Название / Заголовок *»');
+      }
+
+      if (recordTypeEl.value === 'Experience') {
+        const compEl = document.getElementById('company');
+        const roleEl = document.getElementById('role');
+        if (!compEl.value.trim()) {
+          markInvalid(compEl, 'Заполните поле «Компания *»');
+        }
+        if (!roleEl.value.trim()) {
+          markInvalid(roleEl, 'Заполните поле «Должность / Роль *»');
+        }
+      }
+
+      if (!startEl.value) {
+        markInvalid(startEl, 'Укажите «Дата начала *»');
+      }
+      if (startEl.value && endEl.value && endEl.value < startEl.value) {
+        markInvalid(endEl, '«Дата окончания» не может быть раньше «Даты начала»');
+      }
+
+      if (errors.length > 0) {
+        const listHtml = errors.map(err => `<li>${err}</li>`).join('');
+        showFeedback(`<strong>Не удалось сохранить JSON — исправьте ошибки:</strong><ul>${listHtml}</ul>`, 'error');
+        if (firstInvalid) firstInvalid.focus();
+        return false;
+      }
+
+      clearFeedback();
+      return true;
+    }
+
+    function buildExportObject() {
+      const type = recordTypeEl.value;
+      const recId = recordIdEl.value || newId('rec');
+      const now = new Date().toISOString();
+
+      const domainNames = document.getElementById('domains').value
+        .split(',')
+        .map(s => s.trim())
+        .filter(Boolean);
+
+      const domainsDict = [];
+      domainNames.forEach(name => {
+        const domId = slugify(name, 'dom');
+        if (!domainsDict.some(d => d.id === domId)) {
+          domainsDict.push({ id: domId, name: name });
+        }
+      });
+
+      const links = [];
+      const srcUrl = document.getElementById('linkSource').value.trim();
+      const matUrl = document.getElementById('linkMaterials').value.trim();
+      if (srcUrl) links.push({ label: 'Источник / Событие', url: srcUrl });
+      if (matUrl) links.push({ label: 'Материалы / Разбор', url: matUrl });
+
+      const isCurrent = Boolean(document.getElementById('isCurrent')?.checked);
+
+      const record = {
+        id: recId,
+        type: type,
+        createdAt: createdAt,
+        updatedAt: now,
+        title: document.getElementById('title').value.trim(),
+        description: document.getElementById('description').value.trim(),
+        startDate: document.getElementById('startDate').value,
+        endDate: isCurrent ? null : (document.getElementById('endDate').value || null),
+        domainIds: domainsDict.map(d => d.id),
+        links: links,
+        notes: document.getElementById('notes').value.trim(),
+        visibility: document.getElementById('visibility').value
+      };
+
+      if (type === 'Experience') {
+        record.company = document.getElementById('company')?.value.trim() || '';
+        record.role = document.getElementById('role')?.value.trim() || '';
+        record.isCurrent = isCurrent;
+        record.responsibilities = document.getElementById('responsibilities')?.value.trim() || '';
+        record.achievements = document.getElementById('achievements')?.value.trim() || '';
+      } else if (type === 'Activity') {
+        record.activityType = document.getElementById('activityType')?.value || 'Conference';
+        record.format = document.getElementById('format')?.value || 'Online';
+        record.organizer = document.getElementById('organizer')?.value.trim() || '';
+        record.topics = document.getElementById('topics')?.value.trim() || '';
+        record.takeaways = document.getElementById('takeaways')?.value.trim() || '';
+      } else {
+        record.projectType = document.getElementById('projectType')?.value || 'Personal';
+        record.status = document.getElementById('status')?.value || 'In Progress';
+        record.goals = document.getElementById('goals')?.value.trim() || '';
+        record.tasks = document.getElementById('tasks')?.value.trim() || '';
+        record.results = document.getElementById('results')?.value.trim() || '';
+      }
+
+      const techDict = [];
+      const recordTechnologies = [];
+
+      techRows
+        .filter(r => r.name && r.name.trim())
+        .forEach(r => {
+          const cleanName = r.name.trim();
+          const techId = r.techId || slugify(cleanName, 'tech');
+
+          if (!techDict.some(t => t.id === techId)) {
+            techDict.push({ id: techId, name: cleanName });
+          }
+
+          recordTechnologies.push({
+            id: r.linkId || newId('link'),
+            record_id: recId,
+            technology_id: techId,
+            proficiency_level: r.proficiency_level,
+            relevance: r.relevance,
+            evidence_type: r.evidence_type,
+            notes: (r.notes || '').trim()
+          });
+        });
+
+      return {
+        schemaVersion: '1.0.0',
+        meta: {
+          exportedAt: now,
+          singleRecordExport: true
+        },
+        dictionaries: {
+          technologies: techDict,
+          domains: domainsDict
+        },
+        records: [record],
+        recordTechnologies: recordTechnologies
+      };
+    }
+
+    function updatePreview() {
+      jsonPreviewEl.textContent = JSON.stringify(buildExportObject(), null, 2);
+    }
+
+    function onFieldChange(e) {
+      e.target.classList.remove('invalid');
+      updatePreview();
+    }
+
+    function bindLiveInputs() {
+      document.querySelectorAll('.input, input[type="checkbox"]').forEach(el => {
+        el.removeEventListener('input', onFieldChange);
+        el.removeEventListener('change', onFieldChange);
+        el.addEventListener('input', onFieldChange);
+        el.addEventListener('change', onFieldChange);
+      });
+    }
+
+    recordTypeEl.addEventListener('change', () => {
+      clearFeedback();
+      renderDynamicFields(recordTypeEl.value);
+    });
+
+    document.getElementById('btnAddTech').addEventListener('click', () => {
+      techRows.push({
+        name: '',
+        proficiency_level: 'Applied',
+        relevance: 'Primary',
+        evidence_type: 'Professional Work',
+        notes: ''
+      });
+      renderTechList();
+      updatePreview();
+    });
+
+    document.getElementById('btnTogglePreview').addEventListener('click', () => {
+      document.getElementById('previewSection').classList.toggle('hidden');
+      updatePreview();
+    });
+
+    document.getElementById('btnCopyJson').addEventListener('click', () => {
+      if (!validateForm()) return;
+      updatePreview();
+      navigator.clipboard.writeText(jsonPreviewEl.textContent)
+        .then(() => showFeedback('JSON успешно скопирован в буфер обмена.', 'success'))
+        .catch(() => showFeedback('Не удалось скопировать в буфер обмена.', 'error'));
+    });
+
+    document.getElementById('btnDownloadJson').addEventListener('click', () => {
+      if (!validateForm()) return;
+      const data = buildExportObject();
+      const rawTitle = data.records[0]?.title || 'record';
+      const titleSlug = slugify(rawTitle, 'record').slice(0, 36);
+
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = titleSlug + '.json';
+      a.click();
+      URL.revokeObjectURL(url);
+      showFeedback(`Файл <strong>${titleSlug}.json</strong> успешно сформирован и скачан.`, 'success');
+    });
+
+    document.getElementById('btnResetForm').addEventListener('click', () => {
+      if (!confirm('Очистить все поля формы?')) return;
+      createdAt = new Date().toISOString();
+      recordIdEl.value = newId('rec');
+      document.getElementById('title').value = '';
+      document.getElementById('startDate').value = '';
+      document.getElementById('endDate').value = '';
+      document.getElementById('description').value = '';
+      document.getElementById('domains').value = '';
+      document.getElementById('linkSource').value = '';
+      document.getElementById('linkMaterials').value = '';
+      document.getElementById('notes').value = '';
+      document.getElementById('visibility').value = 'Private';
+      document.querySelectorAll('.invalid').forEach(el => el.classList.remove('invalid'));
+      techRows = [];
+      renderTechList();
+      renderDynamicFields(recordTypeEl.value);
+      showFeedback('Форма очищена.', 'success');
+    });
+
+    const fileInput = document.getElementById('jsonFileInput');
+    document.getElementById('btnUploadJson').addEventListener('click', () => fileInput.click());
+
+    fileInput.addEventListener('change', e => {
+      const file = e.target.files?.[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = ev => {
+        try {
+          const parsed = JSON.parse(ev.target.result);
+          const rec = Array.isArray(parsed.records) ? parsed.records[0] : parsed;
+          if (!rec || !rec.type) throw new Error('Некорректный формат записи (отсутствует поле type)');
+
+          recordTypeEl.value = rec.type;
+          recordIdEl.value = rec.id || newId('rec');
+          createdAt = rec.createdAt || new Date().toISOString();
+
+          document.getElementById('title').value = rec.title || '';
+          document.getElementById('startDate').value = rec.startDate || '';
+          document.getElementById('endDate').value = rec.endDate || '';
+          document.getElementById('description').value = rec.description || '';
+          document.getElementById('notes').value = rec.notes || '';
+          document.getElementById('visibility').value = rec.visibility || 'Private';
+
+          const domNames = (rec.domainIds || []).map(id =>
+            parsed.dictionaries?.domains?.find(d => d.id === id)?.name || id
+          );
+          document.getElementById('domains').value = domNames.join(', ');
+
+          const linksArr = Array.isArray(rec.links) ? rec.links : [];
+          const srcLink = linksArr.find(l => l.label === 'Источник / Событие') || linksArr[0];
+          const matLink = linksArr.find(l => l.label === 'Материалы / Разбор');
+          document.getElementById('linkSource').value = srcLink?.url || '';
+          document.getElementById('linkMaterials').value = (matLink && matLink !== srcLink) ? (matLink.url || '') : '';
+
+          const links = (parsed.recordTechnologies || []).filter(l => l.record_id === rec.id);
+          techRows = links.map(l => ({
+            linkId: l.id,
+            techId: l.technology_id,
+            name: parsed.dictionaries?.technologies?.find(t => t.id === l.technology_id)?.name || l.technology_id,
+            proficiency_level: l.proficiency_level || 'Applied',
+            relevance: l.relevance || 'Primary',
+            evidence_type: l.evidence_type || 'Professional Work',
+            notes: l.notes || ''
+          }));
+
+          document.querySelectorAll('.invalid').forEach(el => el.classList.remove('invalid'));
+          renderTechList();
+          renderDynamicFields(rec.type, rec);
+          showFeedback('Запись успешно загружена для редактирования.', 'success');
+        } catch (err) {
+          showFeedback('Ошибка чтения JSON: ' + err.message, 'error');
+        }
+      };
+      reader.readAsText(file);
+      fileInput.value = '';
+    });
+
+    // Инициализация
+    recordIdEl.value = newId('rec');
+    renderDynamicFields('Experience');
+  </script>
+</body>
+</html>
